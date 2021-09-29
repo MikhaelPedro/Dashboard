@@ -22,3 +22,23 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*#resultado {
+    width: 100px;
+    height: 100px;
+    font-size: 25px;
+    cursor: pointer;
+    border: none;
+    background-color: gainsboro;
+    margin: 3px;
+}*/
+#estrutura {
+    height: 300px;
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20px;
+    padding: 20px;
+}
