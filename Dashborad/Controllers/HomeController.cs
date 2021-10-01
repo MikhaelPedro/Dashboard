@@ -8,24 +8,43 @@ namespace Dashborad.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
+        // GET: HOME
         public ActionResult Index()
         {
             return View();
         }
 
-
-        public ActionResult About()
+        [HttpPost]
+        public JsonResult Calc(List<Dashborad.Modelss.DashboardModel> data)
         {
-            ViewBag.Message = "Your application description page.";
+            try
+            {
+                foreach (var item in data)               
+                    item.Balanco = item.Recurso - item.Requisito;
 
-            return View();
+                return Json(new { data = data.OrderBy(l=>l.Mes).ToList(), success = true });
+            }
+            catch(Exception ex)
+            {
+                return Json(new { sucess = false, ex });
+            }
+            
+
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        //public ActionResult About()
+        //{
+        //    ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
+        //    return View();
+        //}
+
+        //public ActionResult Contact()
+        //{
+        //    ViewBag.Message = "Your contact page.";
+
+        //    return View();
+        //}
     }
 }

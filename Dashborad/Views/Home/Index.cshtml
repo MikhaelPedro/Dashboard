@@ -2,10 +2,64 @@
     ViewBag.Title = "Home";
 }
 
-<div id="estrutura" class="col-lg-12 col-md-12">
+@*<div id="barraPrincipal" class="jumbotron">*@
+<h1>Dashboard - Balanço (Recurso X Requisito)</h1>
+
+<p><a id="btnCalcular" style="background-color: orangered; border-color: orangered;" class="btn btn-primary btn-lg">Calcular &raquo;</a></p>
+
+<div>
+
+    <div class="row col-md-12">
+        @{
+            for (int i = 1; i < 13; i++)
+            {
+                var data = Convert.ToDateTime($"01/{i}/{DateTime.Now.Year}");
+                if (i == 7)
+                {
+                    <div class="col-md-12">
+                    </div>
+                }
+
+                var id_recurso = i.ToString() + "R";
+                var id_requisito = i.ToString();
+
+                <div class="col-md-2">
+                    <p class="text-center" style="margin-top: 5px;">@data.ToString("MMMM")</p>
+                    <input type="text" id="@id_recurso" class="form-group-sm form-control" style="margin-right:5px;" placeholder="Recurso"/>
+                    <input type="text" id="@id_requisito" class="form-group-sm form-control" style="margin-right: 5px; margin-top: 5px;" placeholder="Requisito"/>
+
+                </div>
+
+
+
+            }
+
+
+        }
+    </div>
+
+    <div id="estrutura" class="col-lg-12 col-md-12"></div>
 
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @*<div class="Background">
     <div class="estrutura">
