@@ -53,3 +53,7 @@ textarea {
     color: orangered !important;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+#btnCalcular {
+    margin-top: 10px;
+    text-align : right;
+}
