@@ -130,6 +130,12 @@ function CriaDashboard(ListMeses) {
     var myChart = echarts.init(chartDom);
 
     var option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
         xAxis: {
             type: 'category',
             data: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
