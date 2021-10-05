@@ -1,7 +1,7 @@
 ﻿/*const { List } = require("../echarts/echarts-5.2.1/dist/echarts.simple");*/
 
 $(document).ready(function () {
-    debugger
+    /*debugger*/
     
 });
 
