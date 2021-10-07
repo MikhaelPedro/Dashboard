@@ -67,3 +67,8 @@ h1 {
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+.Datas{
+    display: flex;
+    color: white;
+    font-family: 'Franklin Gothic';
+}

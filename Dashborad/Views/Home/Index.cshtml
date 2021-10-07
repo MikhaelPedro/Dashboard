@@ -9,7 +9,16 @@
 
         <div class="row col-md-12">
             @{
-                for (int i = 1; i < 13; i++)
+                        <div class="Datas">
+                            <input type="text" @*id="@id_mesInicial"*@id ="dtIni" class="form-group-sm form-control periodo" style="margin-right:5px;" placeholder="Data Inicial" />
+                            <input type="text" @*id="@id_mesFinal"*@ id ="dtFim"class="form-group-sm form-control periodo" style="margin-right: 5px;" placeholder="Data Final" />
+                            <p><a id="btnGerarMeses" style="background-color: cornflowerblue; border-color: cornflowerblue; " class="btn btn-primary btn-lg">Gerar Meses</a></p>
+
+                        </div>
+                        <div class="inputs">
+
+                        </div>
+                @*for (int i = 1; i < 13; i++)
                 {
                     var data = Convert.ToDateTime($"01/{i}/{DateTime.Now.Year}");
                     if (i == 7)
@@ -21,6 +30,7 @@
                     var id_recurso = i.ToString() + "R";
                     var id_requisito = i.ToString();
 
+
                     <div class="col-md-2">
                         <p class="text-center" style="margin-top: 5px;">@data.ToString("MMMM")</p>
                         <input type="text" id="@id_recurso" class="form-group-sm form-control" style="margin-right:5px;" placeholder="Recurso" />
@@ -30,7 +40,8 @@
 
 
 
-                }
+                }*@
+
                 <div class="text-right">
                     <p><a id="btnCalcular" style="background-color: cornflowerblue; border-color: cornflowerblue; " class="btn btn-primary btn-lg">Balanço de Consumo</a></p>
                 </div>

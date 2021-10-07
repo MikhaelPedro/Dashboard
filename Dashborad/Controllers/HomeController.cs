@@ -32,6 +32,40 @@ namespace Dashborad.Controllers
             
 
         }
+        public JsonResult GerarMeses(string Inicio, string Fim)
+        {
+            try
+            {
+                List<string> mesesDoAno = new List<string>();
+                DateTime dataInicio = DateTime.Parse(Inicio);
+                DateTime dataFim = DateTime.Parse(Fim);
+
+                while (dataInicio <= dataFim)
+                {
+                    mesesDoAno.Add(dataInicio.ToString("MM/yyyy"));
+                    dataInicio = dataInicio.AddMonths(1);
+                }
+
+                return Json(new { data = mesesDoAno, success = true}) ;
+            }
+            catch (Exception ex)
+            {
+                return Json(new { sucess = false, ex });
+            }
+            //try
+            //{
+            //    foreach (var item in data)
+            //        item.Balanco = item.Recurso - item.Requisito;
+
+            //    return Json(new { data = data.OrderBy(l => l.Mes).ToList(), success = true });
+            //}
+            //catch (Exception ex)
+            //{
+            //    return Json(new { sucess = false, ex });
+            //}
+
+
+        }
 
         //public ActionResult About()
         //{

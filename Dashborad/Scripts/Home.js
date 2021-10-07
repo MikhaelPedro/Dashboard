@@ -1,8 +1,21 @@
 ﻿/*const { List } = require("../echarts/echarts-5.2.1/dist/echarts.simple");*/
-
 $(document).ready(function () {
-    /*debugger*/
-    
+    $('.periodo').mask('00/0000');
+});
+$("#btnGerarMeses").click(function () {
+    var Inicio = $("#dtIni").val();
+    var Fim = $("#dtFim").val();
+    var EnviarDados = {Inicio: Inicio, Fim:Fim}
+    GerarMeses(EnviarDados)
+        .done(function (data) {
+            (data.data || []).forEach(function (l, i) {
+                var html = '<div class="col-md-2"><p class="text-center" style = "margin-top: 5px;" > </p><input type="text" id="" class="form-group-sm form-control" style="margin-right:5px;" placeholder="Recurso" /><input type="text" id="" class="form-group-sm form-control" style="margin-right: 5px; margin-top: 5px;" placeholder="Requisito" /></div>';
+                $(".inputs").append(html);
+            });
+        })
+        .fail(function () { // control fail - error request in server
+            alert('Deu ruim');
+        });
 });
 
 $("#btnCalcular").click(function () {
@@ -115,8 +128,17 @@ $("#btnCalcular").click(function () {
     // request ajax
     Calc(data)
         .done(function (result) { // control done - success request in server
+            var recurso = [];
+            var requisito = [];
+            var balanco = [];
 
-            CriaDashboard(result.data);
+            (result.data || []).forEach(function (l, i) {
+                recurso.push(l.Recurso);
+                requisito.push(l.Requisito);
+                balanco.push(l.Balanco);
+            });
+
+            CriaDashboard(recurso, requisito, balanco);
                        
         })
         .fail(function () { // control fail - error request in server
@@ -124,7 +146,7 @@ $("#btnCalcular").click(function () {
         });
 });
 
-function CriaDashboard(ListMeses) {
+function CriaDashboard(Recurso, Requisito, Balanco ) {
 
     var chartDom = document.getElementById('estrutura');
     var myChart = echarts.init(chartDom);
@@ -145,17 +167,17 @@ function CriaDashboard(ListMeses) {
         },
         series: [
             {
-                data: [ListMeses[0].Recurso, ListMeses[1].Recurso, ListMeses[2].Recurso, ListMeses[3].Recurso, ListMeses[4].Recurso, ListMeses[5].Recurso, ListMeses[6].Recurso, ListMeses[7].Recurso, ListMeses[8].Recurso, ListMeses[9].Recurso, ListMeses[10].Recurso, ListMeses[11].Recurso],
+                data: Recurso,
                 type: 'bar',
                 name: 'Recurso'
             },
             {
-                data: [ListMeses[0].Requisito, ListMeses[1].Requisito, ListMeses[2].Requisito, ListMeses[3].Requisito, ListMeses[4].Requisito, ListMeses[5].Requisito, ListMeses[6].Requisito, ListMeses[7].Requisito, ListMeses[8].Requisito, ListMeses[9].Requisito, ListMeses[10].Requisito, ListMeses[11].Requisito],
+                data: Requisito,
                 type: 'bar',
                 name: 'Requisito'
             },
             {
-                data: [ListMeses[0].Balanco, ListMeses[1].Balanco, ListMeses[2].Balanco, ListMeses[3].Balanco, ListMeses[4].Balanco, ListMeses[5].Balanco, ListMeses[6].Balanco, ListMeses[7].Balanco, ListMeses[8].Balanco, ListMeses[9].Balanco, ListMeses[10].Balanco, ListMeses[11].Balanco],
+                data: Balanco,
                 type: 'bar',
                 name: 'Balanço'
             }
@@ -171,4 +193,9 @@ function CriaDashboard(ListMeses) {
 function Calc(data) {
     // post(url, parameter)
     return jQuery.post("/Home/Calc", data);
+}
+
+function GerarMeses(data) {
+    // post(url, parameter)
+    return jQuery.post("/Home/GerarMeses", data);
 }
