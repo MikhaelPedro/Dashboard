@@ -16,55 +16,70 @@ namespace Dashborad.Controllers
         }
 
         [HttpPost]
-        public JsonResult Calc(List<Dashborad.Modelss.DashboardModel> data)
+        public JsonResult Calc(List<Dashborad.Modelss.DashboardPostModel> data)
         {
             try
             {
-                foreach (var item in data)               
-                    item.Balanco = item.Recurso - item.Requisito;
+                var listaMeses = new List<string>();
+                var lista = new List<Dashborad.Modelss.DashboardResultModel>();
+                var count = 1;
+                foreach (var item in data)
+                {
+                    decimal recurso = decimal.Parse(item.Recurso);
+                    decimal requisito = decimal.Parse(item.Requisito);
 
-                return Json(new { data = data.OrderBy(l=>l.Mes).ToList(), success = true });
+                    if (item.Tipo.Contains("Geracao"))
+                    {
+                        listaMeses.Add(item.TxMes);
+                        lista.Add(new Modelss.DashboardResultModel() { Balanco = requisito - recurso , Mes = count, Recurso = recurso, Requisito = requisito });
+                        count++;
+                    }
+                    else
+                    {
+                        listaMeses.Add(item.TxMes);
+                        lista.Add(new Modelss.DashboardResultModel() { Balanco = recurso - requisito, Mes = count, Recurso = recurso, Requisito = requisito });
+                        count++;
+                    }
+                }
+
+                return Json(new { data = lista.OrderBy(l => l.Mes).ToList(), Meses = listaMeses, success = true });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { sucess = false, ex });
             }
-            
+
 
         }
         public JsonResult GerarMeses(string Inicio, string Fim)
         {
             try
             {
+                var countMeses = 0;
                 List<string> mesesDoAno = new List<string>();
                 DateTime dataInicio = DateTime.Parse(Inicio);
                 DateTime dataFim = DateTime.Parse(Fim);
 
                 while (dataInicio <= dataFim)
                 {
+                    countMeses++;
                     mesesDoAno.Add(dataInicio.ToString("MM/yyyy"));
                     dataInicio = dataInicio.AddMonths(1);
                 }
-
-                return Json(new { data = mesesDoAno, success = true}) ;
+                if(countMeses > 2 && countMeses <= 12)
+                {
+                    return Json(new { data = mesesDoAno, success = true });
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch (Exception ex)
             {
                 return Json(new { sucess = false, ex });
             }
-            //try
-            //{
-            //    foreach (var item in data)
-            //        item.Balanco = item.Recurso - item.Requisito;
-
-            //    return Json(new { data = data.OrderBy(l => l.Mes).ToList(), success = true });
-            //}
-            //catch (Exception ex)
-            //{
-            //    return Json(new { sucess = false, ex });
-            //}
-
-
+            
         }
 
         //public ActionResult About()

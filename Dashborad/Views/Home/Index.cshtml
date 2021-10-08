@@ -4,54 +4,34 @@
 
 <h1>Dashboard</h1>
 
-<div class ="fundo">
+<div class="fundo">
+
+
     <div>
 
         <div class="row col-md-12">
-            @{
-                        <div class="Datas">
-                            <input type="text" @*id="@id_mesInicial"*@id ="dtIni" class="form-group-sm form-control periodo" style="margin-right:5px;" placeholder="Data Inicial" />
-                            <input type="text" @*id="@id_mesFinal"*@ id ="dtFim"class="form-group-sm form-control periodo" style="margin-right: 5px;" placeholder="Data Final" />
-                            <p><a id="btnGerarMeses" style="background-color: cornflowerblue; border-color: cornflowerblue; " class="btn btn-primary btn-lg">Gerar Meses</a></p>
 
-                        </div>
-                        <div class="inputs">
+            <div class="Datas" style="margin-top:30px">
+                <input type="text" id="dtIni" class="form-group-sm form-control periodo" style="margin-right:5px;" placeholder="Data Inicial" />
+                <input type="text" id="dtFim" class="form-group-sm form-control periodo" style="margin-right: 5px;" placeholder="Data Final" />
+                <p><a id="btnGerarMeses" class="btn btn-success">Gerar Meses</a></p>
 
-                        </div>
-                @*for (int i = 1; i < 13; i++)
-                {
-                    var data = Convert.ToDateTime($"01/{i}/{DateTime.Now.Year}");
-                    if (i == 7)
-                    {
-                        <div class="col-md-12">
-                        </div>
-                    }
+            </div>
+            <div class="inputs">
 
-                    var id_recurso = i.ToString() + "R";
-                    var id_requisito = i.ToString();
+            </div>
+
+            <div class="text-right">
+                <p><a id="btnCalcular" class="btn btn-primary  " style="display:none;margin-top:15px">Balanço de Consumo</a></p>
+            </div>
+            <div class="text-right">
+                <p><a id="btnCalcularGeracao" class="btn btn-danger" style="display:none;">Balanço de Geração</a></p>
+            </div>
 
 
-                    <div class="col-md-2">
-                        <p class="text-center" style="margin-top: 5px;">@data.ToString("MMMM")</p>
-                        <input type="text" id="@id_recurso" class="form-group-sm form-control" style="margin-right:5px;" placeholder="Recurso" />
-                        <input type="text" id="@id_requisito" class="form-group-sm form-control" style="margin-right: 5px; margin-top: 5px;" placeholder="Requisito" />
-
-                    </div>
-
-
-
-                }*@
-
-                <div class="text-right">
-                    <p><a id="btnCalcular" style="background-color: cornflowerblue; border-color: cornflowerblue; " class="btn btn-primary btn-lg">Balanço de Consumo</a></p>
-                </div>
-                <div class="text-right">
-                    <p><a id="btnCalcularGeracao" style="background-color: cornflowerblue; border-color: cornflowerblue; " class="btn btn-primary btn-lg">Balanço de Geração</a></p>
-                </div>
-            }
         </div>
     </div>
-    <div id="estrutura" class="col-lg-12 col-md-12"></div>
+    <div id="estrutura" class="col-lg-12 col-md-12" ></div>
 
 
 </div>
