@@ -16,6 +16,10 @@ namespace Dashborad.Controllers
         }
 
         [HttpPost]
+        //Recebe a Lista com os dados da requisicao AJAX
+        //Verifica o tipo de caculo
+        //Condicao pelo tipo de calculo contido na lista
+        //Faz o ADD no listaMeses do TXMes, para ficar contido no rodapé do dashboard
         public JsonResult Calc(List<Dashborad.Modelss.DashboardPostModel> data)
         {
             try
@@ -51,6 +55,9 @@ namespace Dashborad.Controllers
 
 
         }
+        //Recebe do request a data incio e fim
+        //Faz a adicao dos meses enquanto a verificao seja verdadeira
+        //verifica de a quantidade de meses (countMeses) é maior than 2 or menor or igual 12
         public JsonResult GerarMeses(string Inicio, string Fim)
         {
             try
@@ -82,18 +89,5 @@ namespace Dashborad.Controllers
             
         }
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
     }
 }
