@@ -73,7 +73,7 @@ namespace Dashborad.Controllers
                     mesesDoAno.Add(dataInicio.ToString("MM/yyyy"));
                     dataInicio = dataInicio.AddMonths(1);
                 }
-                if(countMeses > 2 && countMeses <= 12)
+                if(countMeses > 1 && countMeses <= 12)
                 {
                     return Json(new { data = mesesDoAno, success = true });
                 }
